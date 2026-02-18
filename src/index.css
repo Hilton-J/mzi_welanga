@@ -1,1 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Inter:wght@300;400..700&display=swap");
 @import "tailwindcss";
+
+@theme {
+  /* Matrix-inspired dark theme */
+  --color-background: #090c11;
+  --color-foreground: #e6faff;
+
+  --color-card: #0f1520;
+  --color-card-foreground: #e6faff;
+
+  --color-popover: #0f1520;
+  --color-popover-foreground: #e6faff;
+
+  --color-primary: #00d4ff;
+  --color-primary-foreground: #090c11;
+
+  --color-secondary: #1f2733;
+  --color-secondary-foreground: #ccf0ff;
+
+  --color-muted: #181f29;
+  --color-muted-foreground: #8ba3b3;
+
+  --color-accent: #00d4ff;
+  --color-accent-foreground: #090c11;
+
+  --color-destructive: #e84040;
+  --color-destructive-foreground: #f5f8fc;
+
+  --color-border: #1f3d4d;
+  --color-input: #1f2733;
+  --color-ring: #00d4ff;
+
+  --radius: 0.75rem;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Custom Matrix variables */
+  --color-cyan-glow: #00d4ff;
+  --color-cyan-dim: #12566e;
+  --color-navy-deep: #050811;
+  --color-silver: #c2ccd6;
+  --color-matrix-green: #00ff6a;
+
+  /* Gradients */
+  --color-gradient-hero: linear-gradient(
+    135deg,
+    #050811 0%,
+    #0f1520 50%,
+    #0a1210 100%
+  );
+  --color-gradient-card: linear-gradient(180deg, #0f1520cc 0%, #090c11e6 100%);
+  --color-gradient-glow: linear-gradient(
+    90deg,
+    #00d4ff00 0%,
+    #00d4ff80 50%,
+    #00d4ff00 100%
+  );
+  --color-gradient-text: linear-gradient(
+    135deg,
+    #66cfff 0%,
+    #00d4ff 50%,
+    #00e6cc 100%
+  );
+
+  /* Shadows */
+  --color-shadow-glow: 0 0 30px #00d4ff4d;
+  --color-shadow-glow-intense: 0 0 60px #00d4ff80;
+  --color-shadow-card: 0 8px 32px #050811cc;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", sans-serif;
+    background: var(--color-gradient-hero);
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Orbitron", sans-serif;
+  }
+}
+
+/* =========================
+   CONTAINER
+========================= */
+@layer utilities {
+  .container {
+    margin-inline: auto;
+    padding-inline: 2rem;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1400px;
+    }
+  }
+}
+
+/* Glowing text effect */
+.text-glow {
+  text-shadow:
+    0 0 10px #00d4ffcc,
+    0 0 20px #00d4ff99,
+    0 0 40px #00d4ff66;
+}
+
+.text-glow-subtle {
+  text-shadow:
+    0 0 10px #00d4ff80,
+    0 0 20px #00d4ff4d;
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: linear-gradient(180deg, #0f152099 0%, #090c11cc 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid #00d4ff33;
+  box-shadow:
+    var(--color-shadow-card),
+    inset 0 1px 0 #00d4ff1a;
+}
+
+.glass-card:hover {
+  border-color: #00d4ff66;
+  box-shadow: var(--color-shadow-glow), var(--color-shadow-card);
+}
+
+/* Cyber button */
+.cyber-button {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-cyan-glow) 0%, #0099cc 100%);
+  border: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cyber-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffffff4d, transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:hover {
+  box-shadow: var(--color-shadow-glow-intense);
+  transform: translateY(-2px);
+}
