@@ -68,6 +68,10 @@
   --color-shadow-glow: 0 0 30px #00d4ff4d;
   --color-shadow-glow-intense: 0 0 60px #00d4ff80;
   --color-shadow-card: 0 8px 32px #050811cc;
+
+  --text-shadow-glow:
+    0 0 10px #00d4ffcc, 0 0 20px #00d4ff99, 0 0 40px #00d4ff66;
+  --text-shadow-glow-subtle: 0 0 10px #00d4ff80, 0 0 20px #00d4ff4d;
 }
 
 @layer base {
@@ -113,60 +117,52 @@
   }
 }
 
-/* Glowing text effect */
-.text-glow {
-  text-shadow:
-    0 0 10px #00d4ffcc,
-    0 0 20px #00d4ff99,
-    0 0 40px #00d4ff66;
-}
+@layer componets {
+  /* Glass morphism card */
+  .glass-card {
+    background: linear-gradient(180deg, #0f152099 0%, #090c11cc 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid #00d4ff33;
+    box-shadow:
+      var(--color-shadow-card),
+      inset 0 1px 0 #00d4ff1a;
+  }
 
-.text-glow-subtle {
-  text-shadow:
-    0 0 10px #00d4ff80,
-    0 0 20px #00d4ff4d;
-}
+  .glass-card:hover {
+    border-color: #00d4ff66;
+    box-shadow: var(--color-shadow-glow), var(--color-shadow-card);
+  }
 
-/* Glass morphism card */
-.glass-card {
-  background: linear-gradient(180deg, #0f152099 0%, #090c11cc 100%);
-  backdrop-filter: blur(20px);
-  border: 1px solid #00d4ff33;
-  box-shadow:
-    var(--color-shadow-card),
-    inset 0 1px 0 #00d4ff1a;
-}
+  /* Cyber button */
+  .cyber-button {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      var(--color-cyan-glow) 0%,
+      #0099cc 100%
+    );
+    border: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
 
-.glass-card:hover {
-  border-color: #00d4ff66;
-  box-shadow: var(--color-shadow-glow), var(--color-shadow-card);
-}
+  .cyber-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #ffffff4d, transparent);
+    transition: left 0.5s ease;
+  }
 
-/* Cyber button */
-.cyber-button {
-  position: relative;
-  background: linear-gradient(135deg, var(--color-cyan-glow) 0%, #0099cc 100%);
-  border: none;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
+  .cyber-button:hover::before {
+    left: 100%;
+  }
 
-.cyber-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, #ffffff4d, transparent);
-  transition: left 0.5s ease;
-}
-
-.cyber-button:hover::before {
-  left: 100%;
-}
-
-.cyber-button:hover {
-  box-shadow: var(--color-shadow-glow-intense);
-  transform: translateY(-2px);
+  .cyber-button:hover {
+    box-shadow: var(--color-shadow-glow-intense);
+    transform: translateY(-2px);
+  }
 }
